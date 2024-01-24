@@ -1,5 +1,0 @@
-name: myBlog
-
-on:
-  push:
-    branches:
