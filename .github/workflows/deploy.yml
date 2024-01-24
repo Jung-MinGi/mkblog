@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "cloud.aws.credentials.access-key=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./src/main/resources/application.properties
           echo "cloud.aws.credentials.secret-key=${{ secrets.AWS_SECRET_KEY_ID }}" >> ./src/main/resources/application.properties
-          echo "cloud.aws.s3.bucket=ap-northeast-2" >> ./src/main/resources/application.properties
+          echo "cloud.aws.s3.bucket=elasticbeanstalk-ap-northeast-2-248147157423" >> ./src/main/resources/application.properties
 
       - name: Build with Gradle
         run: ./gradlew clean build
