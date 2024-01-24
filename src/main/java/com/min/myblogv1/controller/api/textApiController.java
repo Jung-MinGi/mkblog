@@ -1,6 +1,8 @@
 package com.min.myblogv1.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.min.myblogv1.Path;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,13 @@ import java.io.IOException;
 public class textApiController {
     private final ObjectMapper objectMapper;
     @PostMapping("/temp/upload")
-    public ResponseEntity<String> tempImageSave(MultipartFile file) throws IOException {
-
+    public Path tempImageSave(MultipartFile file) throws IOException {
         log.info("임시파일 로직 ={}",file.getOriginalFilename());
         log.info("임시파일 로직 ={}",file.getName());
         log.info("임시파일 로직 ={}",file.getContentType());
         log.info("임시파일 로직 ={}",file.getResource());
-        return new ResponseEntity<>(file.toString(), HttpStatus.OK);
+        Path path = new Path();
+        path.setUrl("정민기");
+        return path;
     }
 }

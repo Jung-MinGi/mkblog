@@ -54,6 +54,7 @@
 			contentType : false,
 			processData : false,
 			success : function(data) {
+			console.log("url = "+data.url);
             	//항상 업로드된 파일의 url이 있어야 한다.
 				$(editor).summernote('insertImage', data.url);
 			}
