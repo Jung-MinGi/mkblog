@@ -12,7 +12,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class viewController {
-
+    @GetMapping("/")
+    public String IndexHandler() {
+        return "index";
+    }
     @GetMapping("/image")//글 작성 페이지로 이동 핸들러
     public String summer(Model model) {
 //        List<String> list = service.getTables();
