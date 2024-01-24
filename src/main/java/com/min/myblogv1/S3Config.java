@@ -29,7 +29,7 @@ public class S3Config {
     @Bean
     public S3Client s3Client(AwsCredentials awsCredentials){
         return S3Client.builder()
-                .region(Region.AP_NORTHEAST_2)
+                .region(Region.of("ap-northeast-2"))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
                 .build();
     }

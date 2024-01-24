@@ -48,6 +48,8 @@ public class textApiController {
         path = new Path();
         path.setUrl(url);
         System.out.println("path.getUrl() = " + path.getUrl());
+        //todo 다른 버킷 만들어서 해보자 !!!!!!!!@@@
+        //
         return new ResponseEntity<>(path, HttpStatus.OK);
     }
 
