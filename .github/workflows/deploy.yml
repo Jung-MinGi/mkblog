@@ -26,3 +26,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
         shell: bash
+
+      - name: current time set
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
+      - name: show current time
+        run: echo "current time=${{steps.current-time.outputs.formattedTime}}"
+        shell: bash
