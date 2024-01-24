@@ -23,11 +23,12 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
 
-      - name: make application.properties
-        run: |
-          echo "cloud.aws.credentials.access-key=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./src/main/resources/application.properties
-          echo "cloud.aws.credentials.secret-key=${{ secrets.AWS_SECRET_KEY_ID }}" >> ./src/main/resources/application.properties
-          echo "cloud.aws.s3.bucket=ap-northeast-2" >> ./src/main/resources/application.properties
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
+          aws-region: ap-northeast-2
 
       - name: Build with Gradle
         run: ./gradlew clean build
