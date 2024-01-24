@@ -32,36 +32,37 @@ public class textApiController {
     private final S3Client s3;
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
+
     @PostMapping("/temp/upload")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
-        Path path=null;
-        try {
-            PutObjectRequest objectRequest = getPutObjectRequest(file.getOriginalFilename());
-            RequestBody rb = getFileRequestBody(file);
-            s3.putObject(objectRequest,rb);
-            String url = getUrl(file.getOriginalFilename());
-            log.info("url={}",url);
-             path = new Path();
-            path.setUrl(url);
-        }catch (RuntimeException e){
-            log.error("e.getmsg=",e.getMessage());
-            log.error("e.getmsg=",e.getStackTrace());
-            log.error("e.getmsg=",e.getCause());
-        }
-
+        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
+        Path path = null;
+        PutObjectRequest objectRequest = getPutObjectRequest(file.getOriginalFilename());
+        System.out.println("objectRequest = " + objectRequest.bucket());
+        RequestBody rb = getFileRequestBody(file);
+        System.out.println("rb = " + rb.toString());
+        s3.putObject(objectRequest, rb);
+        String url = getUrl(file.getOriginalFilename());
+        System.out.println("url = " + url);
+        log.info("url={}", url);
+        path = new Path();
+        path.setUrl(url);
+        System.out.println("path.getUrl() = " + path.getUrl());
         return new ResponseEntity<>(path, HttpStatus.OK);
     }
 
-    private PutObjectRequest getPutObjectRequest(String key){
+    private PutObjectRequest getPutObjectRequest(String key) {
         return PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
                 .build();
     }
+
     private RequestBody getFileRequestBody(MultipartFile file) throws IOException {
-        return RequestBody.fromInputStream(file.getInputStream(),file.getSize());
+        return RequestBody.fromInputStream(file.getInputStream(), file.getSize());
     }
-    private String getUrl(String key){
+
+    private String getUrl(String key) {
         S3Utilities s3Utilities = s3.utilities();
         GetUrlRequest request = GetUrlRequest.builder()
                 .bucket(bucketName)
