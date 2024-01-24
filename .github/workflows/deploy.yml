@@ -46,6 +46,7 @@ jobs:
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
         with:
@@ -55,4 +56,4 @@ jobs:
           environment_name: Mk-blog-env
           version_label: Mk-blog-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
-          deployment_package: deploy.zip
+          deployment_package: deploy/deploy.zip
