@@ -24,7 +24,6 @@ public class textApiController {
         log.info("임시파일 로직 ={}",file.getOriginalFilename());
         log.info("임시파일 로직 ={}",file.getName());
         log.info("임시파일 로직 ={}",file.getContentType());
-        log.info("임시파일 로직 ={}",file.getInputStream());
         log.info("임시파일 로직 ={}",file.getResource());
         return new ResponseEntity<>(file.toString(), HttpStatus.OK);
     }
