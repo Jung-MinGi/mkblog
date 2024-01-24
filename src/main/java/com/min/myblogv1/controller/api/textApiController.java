@@ -34,13 +34,21 @@ public class textApiController {
     private String bucketName;
     @PostMapping("/temp/upload")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
-        PutObjectRequest objectRequest = getPutObjectRequest(file.getOriginalFilename());
-        RequestBody rb = getFileRequestBody(file);
-        s3.putObject(objectRequest,rb);
-        String url = getUrl(file.getOriginalFilename());
-        log.info("url={}",url);
-        Path path = new Path();
-        path.setUrl(url);
+        Path path=null;
+        try {
+            PutObjectRequest objectRequest = getPutObjectRequest(file.getOriginalFilename());
+            RequestBody rb = getFileRequestBody(file);
+            s3.putObject(objectRequest,rb);
+            String url = getUrl(file.getOriginalFilename());
+            log.info("url={}",url);
+             path = new Path();
+            path.setUrl(url);
+        }catch (RuntimeException e){
+            log.error("e.getmsg=",e.getMessage());
+            log.error("e.getmsg=",e.getStackTrace());
+            log.error("e.getmsg=",e.getCause());
+        }
+
         return new ResponseEntity<>(path, HttpStatus.OK);
     }
 
