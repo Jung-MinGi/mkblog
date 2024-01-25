@@ -37,22 +37,29 @@ public class textApiController {
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
         System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
         Path path = null;
-        PutObjectRequest objectRequest = getPutObjectRequest(file.getOriginalFilename());
+        String key = "image/"+getServerFileName(file.getOriginalFilename());
+        System.out.println("key = " + key);
+        PutObjectRequest objectRequest = getPutObjectRequest(key);
         System.out.println("objectRequest = " + objectRequest.bucket());
         RequestBody rb = getFileRequestBody(file);
         System.out.println("rb = " + rb.toString());
         s3.putObject(objectRequest, rb);
-        String url = getUrl(file.getOriginalFilename());
+        String url = getUrl(key);
         System.out.println("url = " + url);
         log.info("url={}", url);
         path = new Path();
         path.setUrl(url);
         System.out.println("path.getUrl() = " + path.getUrl());
-        //todo 다른 버킷 만들어서 해보자 !!!!!!!!@@@
-        //
         return new ResponseEntity<>(path, HttpStatus.OK);
     }
-
+    private static String getServerFileName(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        String substring = originalFilename.substring(pos + 1);
+        String string = UUID.randomUUID().toString();
+        String n = string + "." + substring;
+        System.out.println("n = " + n);
+        return n;
+    }
     private PutObjectRequest getPutObjectRequest(String key) {
         return PutObjectRequest.builder()
                 .bucket(bucketName)
