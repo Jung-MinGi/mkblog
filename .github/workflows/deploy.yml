@@ -32,6 +32,9 @@ jobs:
           echo "spring.datasource.username=${{ secrets.RDS_USERNAME }}" >> ./src/main/resources/application.properties
           echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" >> ./src/main/resources/application.properties
           echo "spring.datasource.password=${{ secrets.RDS_PASSWORD }}" >> ./src/main/resources/application.properties
+          echo "mybatis.type-aliases-package=com.min.myblogv1.domain" >> ./src/main/resources/application.properties
+          echo "mybatis.mapper-locations=classpath:mapper/**/*.xml" >> ./src/main/resources/application.properties
+          echo "mybatis.configuration.map-underscore-to-camel-case=true" >> ./src/main/resources/application.properties
       
 
       - name: Display application.properties
