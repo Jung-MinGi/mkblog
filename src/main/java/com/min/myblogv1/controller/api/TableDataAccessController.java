@@ -2,11 +2,13 @@ package com.min.myblogv1.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.myblogv1.Path;
+import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -28,17 +31,21 @@ public class TableDataAccessController {
 
     private final ObjectMapper objectMapper;
     private final S3Client s3;
+    private final DataAccessService service;
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
-
+    @GetMapping("/tables")
+    public List<String> getAllTablesName(){
+        return service.getTablesName();
+    }
 
 
     @PostMapping("/temp/upload")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
         System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
         Path path = null;
-        String key = "image/"+getServerFileName(file.getOriginalFilename());
+        String key = "image/" + getServerFileName(file.getOriginalFilename());
         System.out.println("key = " + key);
         PutObjectRequest objectRequest = getPutObjectRequest(key);
         System.out.println("objectRequest = " + objectRequest.bucket());
@@ -53,6 +60,7 @@ public class TableDataAccessController {
         System.out.println("path.getUrl() = " + path.getUrl());
         return new ResponseEntity<>(path, HttpStatus.OK);
     }
+
     private static String getServerFileName(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         String substring = originalFilename.substring(pos + 1);
@@ -61,6 +69,7 @@ public class TableDataAccessController {
         System.out.println("n = " + n);
         return n;
     }
+
     private PutObjectRequest getPutObjectRequest(String key) {
         return PutObjectRequest.builder()
                 .bucket(bucketName)
