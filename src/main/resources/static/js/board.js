@@ -12,22 +12,23 @@ let index = {
 		save: function(){
 
 			let data = {
-			        tableName:$("#tableNameSelect").val(),
+			        category:$("#tableNameSelect").val(),
 			        title: $("#title").val(),
 					content: $("#summernote").val()
 			};
 
-            alert(data.tableName);
 			$.ajax({
 				type: "POST",
-				url: "/api/image",
+				url: "/api/file/upload",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 			}).done(function(resp){
 				alert("글 작성 완료되었습니다."+JSON.stringify(resp));
 				location.href = `/writeShow/${resp.category}/${resp.title}`;
-			}).fail(function(error){
-				alert(error.responseText);
+			}).fail(function(resp){
+			    const error = resp.responseJSON;
+                let defaultMessage = error[0].defaultMessage;
+                alert(defaultMessage+"!");
 			});
 		}
 }

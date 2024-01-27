@@ -63,9 +63,20 @@
     </script>
 </head>
 <body>
+<div>
+    <select name="category" id="tableNameSelect">
+        <option value="">카테고리를 선택하세요</option>
+        <option th:each="table :${tables}" th:value="${table}"
+                th:text="${table}"></option>
+    </select>
+</div>
 <form method="post">
+    <input type="text" id="title" placeholder="제목" style="height: 40px;">
     <textarea id="summernote" name="editordata"></textarea>
 </form>
+<button id="btn-save" style="margin-left: 10px"> 전송</button>
+<button id="btn-cancel" style="margin-left: 50px">취소하기</button>
+<script src="/js/board.js"></script>
 <script>
     $(document).ready(function() {
         $('#summernote').summernote();

@@ -27,6 +27,7 @@ public class FileProcess {
         PutObjectRequest objectRequest = getPutObjectRequest(key);
         RequestBody rb = getFileRequestBody(file);
         s3.putObject(objectRequest, rb);
+        s3.close();
         String url = getUrl(key);
         path.setUrl(url);
         return path;
