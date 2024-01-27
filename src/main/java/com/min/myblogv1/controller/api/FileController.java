@@ -11,14 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.S3Utilities;
-import software.amazon.awssdk.services.s3.model.GetUrlRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -29,30 +24,26 @@ public class FileController {
     private final FileProcess fileProcess;
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
+
     @PostMapping("/temp/upload")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
-        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
-        Path path = null;
-        String key = "image/" + fileProcess.getServerFileName(file.getOriginalFilename());
-        System.out.println("key = " + key);
-        PutObjectRequest objectRequest = fileProcess.getPutObjectRequest(key);
-        System.out.println("objectRequest = " + objectRequest.bucket());
-        RequestBody rb = fileProcess.getFileRequestBody(file);
-        System.out.println("rb = " + rb.toString());
-        s3.putObject(objectRequest, rb);
-        String url = fileProcess.getUrl(key);
-        System.out.println("url = " + url);
-        log.info("url={}", url);
-        path = new Path();
-        path.setUrl(url);
-        System.out.println("path.getUrl() = " + path.getUrl());
-        return new ResponseEntity<>(path, HttpStatus.OK);
+//        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
+//        Path path = null;
+//        String key = "tempImage/" + fileProcess.getServerFileName(file.getOriginalFilename());
+//        System.out.println("key = " + key);
+//        PutObjectRequest objectRequest = fileProcess.getPutObjectRequest(key);
+//        System.out.println("objectRequest = " + objectRequest.bucket());
+//        RequestBody rb = fileProcess.getFileRequestBody(file);
+//        System.out.println("rb = " + rb.toString());
+//        s3.putObject(objectRequest, rb);
+//        String url = fileProcess.getUrl(key);
+//        System.out.println("url = " + url);
+//        log.info("url={}", url);
+//        path = new Path();
+//        path.setUrl(url);
+//        System.out.println("path.getUrl() = " + path.getUrl());
+        return new ResponseEntity<>(fileProcess.fileUpload("tempImage",file), HttpStatus.OK);
     }
-
-
-
-
-
 
 
 
