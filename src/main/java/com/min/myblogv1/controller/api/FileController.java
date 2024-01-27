@@ -3,6 +3,7 @@ package com.min.myblogv1.controller.api;
 import com.min.myblogv1.Path;
 import com.min.myblogv1.domain.FileProcess;
 import com.min.myblogv1.domain.WriteForm;
+import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ import java.util.List;
 public class FileController {
     private final S3Client s3;
     private final FileProcess fileProcess;
+    private final DataAccessService service;
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
@@ -59,9 +61,11 @@ public class FileController {
         log.info("WriteForm={}", formData);
         if (bindingResult.hasErrors()) {
             log.info("formData={}", formData);
-            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("OK",HttpStatus.OK);
+        service.formDataSave(formData);
+
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
 
