@@ -38,7 +38,7 @@ public class FileProcess {
         s3.putObject(objectRequest, rb);
         String url = getUrl(key);
         path.setUrl(url);
-        s3.close();
+//        s3.close();
         return path;
     }
 
