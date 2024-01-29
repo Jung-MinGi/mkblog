@@ -48,11 +48,12 @@ public class DataAccessService {
         Elements imgTag = body.getElementsByTag("img");
         for (Element element : imgTag) {
             String src = element.attr("src");
-            src=src.replaceFirst("tempImage","Image");
             //여기서 파일 복사
             String key = src.substring(src.lastIndexOf("Image"));
             fileProcess.copyObject(key);
             //
+            src=src.replaceFirst("tempImage","Image");
+
             element.attr("src",src);
         }
         return body.html();
