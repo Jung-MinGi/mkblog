@@ -49,7 +49,7 @@ public class DataAccessService {
         for (Element element : imgTag) {
             String src = element.attr("src");
             //여기서 파일 복사
-            String key = src.substring(src.lastIndexOf("Image"));
+            String key = src.substring(src.lastIndexOf("tempImage"));
             fileProcess.copyObject(key);
             //
             src=src.replaceFirst("tempImage","Image");

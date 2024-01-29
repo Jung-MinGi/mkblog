@@ -48,11 +48,12 @@ public class FileProcess {
         return path;
     }
 
-    public void copyObject(String destinationKey) {
+    public void copyObject(String key) {
+        String destinationKey = key.substring(key.lastIndexOf("tempImage"));
         log.info("copyObject={}", destinationKey);
         CopyObjectRequest copyObjectRequest =CopyObjectRequest
                 .builder()
-                .sourceKey(destinationKey)
+                .sourceKey(key)
                 .sourceBucket(bucketName)
                 .destinationBucket(bucketName)
                 .destinationKey(destinationKey)
