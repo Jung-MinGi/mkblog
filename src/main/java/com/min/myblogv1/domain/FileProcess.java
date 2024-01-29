@@ -9,18 +9,21 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3Utilities;
 import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.UUID;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -32,12 +35,24 @@ public class FileProcess {
     public Path fileUpload(String folderName, MultipartFile file) throws IOException {
         Path path = new Path();
         String key = folderName + "/" + getServerFileName(file.getOriginalFilename());
-        log.info("fileUploadkey={}",key);
+        log.info("fileUploadkey={}", key);
         PutObjectRequest objectRequest = getPutObjectRequest(key);
         RequestBody rb = getFileRequestBody(file);
         s3.putObject(objectRequest, rb);
         String url = getUrl(key);
         path.setUrl(url);
+//
+        String destinationKey = key.replaceFirst("tempImage","Image");
+        CopyObjectRequest copyObjectRequest =CopyObjectRequest
+                .builder()
+                .sourceKey(key)
+                .sourceBucket(bucketName)
+                .destinationBucket(bucketName)
+                .destinationKey(destinationKey)
+                .build();
+        s3.copyObject(copyObjectRequest);
+        log.info("copy path={}",destinationKey);
+//
 //        s3.close();
         return path;
     }
@@ -84,7 +99,8 @@ public class FileProcess {
         s3.deleteObjects(deleteObjectRequest);
         s3.close();
     }
-//image태그의 src값에서 객체 키 추출
+
+    //image태그의 src값에서 객체 키 추출
     public HashSet<String> imgTagFindSrc(String bodyContent) throws IOException {
         Element body = Jsoup.parse(bodyContent).body();
         Elements imgTag = body.getElementsByTag("img");
@@ -95,7 +111,7 @@ public class FileProcess {
             //todo 여기서 파일 이동일어남
             try {
                 keys.add(src.substring(src.lastIndexOf("tempImage")));
-                log.info("list.get(0)={}",keys.get(0));
+                log.info("list.get(0)={}", keys.get(0));
             } catch (StringIndexOutOfBoundsException e) {
                 log.info("작성자가 올린 이미지가 아닙니다");
             }
@@ -105,7 +121,7 @@ public class FileProcess {
         return set;
     }
 
-    public void s3Move(String key){
+    public void s3Move(String key) {
         String encodedUrl = URLEncoder.encode(bucketName + "/" + key, StandardCharsets.UTF_8);
         CopyObjectRequest copyReq = CopyObjectRequest.builder()
                 .copySourceIfMatch(encodedUrl)
