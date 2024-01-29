@@ -35,7 +35,7 @@ public class FileProcess {
     public Path fileUpload(String folderName, MultipartFile file) throws IOException {
         Path path = new Path();
         String key = folderName + "/" + getServerFileName(file.getOriginalFilename());
-        log.info("fileUploadkey={}", key);
+
         PutObjectRequest objectRequest = getPutObjectRequest(key);
         RequestBody rb = getFileRequestBody(file);
         s3.putObject(objectRequest, rb);
@@ -49,6 +49,7 @@ public class FileProcess {
     }
 
     public void copyObject(String destinationKey) {
+        log.info("copyObject={}", destinationKey);
         CopyObjectRequest copyObjectRequest =CopyObjectRequest
                 .builder()
                 .sourceKey(destinationKey)
