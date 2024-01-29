@@ -1,5 +1,6 @@
 package com.min.myblogv1.repository.mybatis;
 
+import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.repository.mapper.DataGetMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,5 +16,10 @@ public class DataGetRepositoryImpl implements DataGetRepository {
     @Override
     public List<String> getTablesName() {
         return mapper.getTablesName();
+    }
+
+    @Override
+    public void save(WriteForm writeForm) {
+         mapper.save(writeForm);
     }
 }

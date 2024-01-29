@@ -42,6 +42,13 @@ public class FileProcess {
         String url = getUrl(key);
         path.setUrl(url);
 //
+
+//
+//        s3.close();
+        return path;
+    }
+
+    public void copyObject(String key) {
         String destinationKey = key.replaceFirst("tempImage","Image");
         CopyObjectRequest copyObjectRequest =CopyObjectRequest
                 .builder()
@@ -52,9 +59,6 @@ public class FileProcess {
                 .build();
         s3.copyObject(copyObjectRequest);
         log.info("copy path={}",destinationKey);
-//
-//        s3.close();
-        return path;
     }
 
     public String getServerFileName(String originalFilename) {
@@ -97,7 +101,7 @@ public class FileProcess {
                 .delete(Delete.builder().objects(toDelete).build())
                 .build();
         s3.deleteObjects(deleteObjectRequest);
-        s3.close();
+//        s3.close();
     }
 
     //image태그의 src값에서 객체 키 추출

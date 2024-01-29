@@ -4,4 +4,8 @@
     <select id="getTablesName" resultType="String">
         show tables
     </select>
+
+    <insert id="save">
+        insert into ${category}(category,title,content) values(#{category},#{title},#{content})
+    </insert>
 </mapper>
