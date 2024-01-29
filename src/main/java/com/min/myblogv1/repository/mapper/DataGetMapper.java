@@ -9,4 +9,6 @@ import java.util.List;
 public interface DataGetMapper {
     List<String> getTablesName();
     void save(WriteForm writeForm);
+
+    WriteForm findTextByTitle(String category,String title);
 }

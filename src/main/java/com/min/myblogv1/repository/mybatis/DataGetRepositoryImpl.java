@@ -22,4 +22,9 @@ public class DataGetRepositoryImpl implements DataGetRepository {
     public void save(WriteForm writeForm) {
          mapper.save(writeForm);
     }
+
+    @Override
+    public WriteForm findTextByTitle(String category, String title) {
+        return mapper.findTextByTitle(category,title);
+    }
 }

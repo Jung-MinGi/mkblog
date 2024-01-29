@@ -33,8 +33,8 @@ class DataGetRepositoryImplTest {
         writeForm.setCategory("spring");
         writeForm.setTitle("title1");
         writeForm.setContent("content1");
-
         repository.save(writeForm);
-//        assertThat(save.getTitle()).isEqualTo("title1");
+        WriteForm result = repository.findTextByTitle(writeForm.getCategory(), writeForm.getTitle());
+        assertThat(result.getTitle()).isEqualTo("title1");
     }
 }

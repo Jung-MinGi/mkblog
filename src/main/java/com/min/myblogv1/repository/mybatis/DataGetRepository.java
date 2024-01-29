@@ -10,4 +10,6 @@ import java.util.List;
 public interface DataGetRepository {
     List<String> getTablesName();
     void save(WriteForm writeForm);
-    }
+    WriteForm findTextByTitle(String category,String title);
+
+}

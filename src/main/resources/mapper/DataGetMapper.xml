@@ -8,4 +8,8 @@
     <insert id="save">
         insert into ${category}(category,title,content) values(#{category},#{title},#{content})
     </insert>
+
+    <select id="findTextByTitle" resultType="WriteForm">
+        select * from ${category} where title=#{title}
+    </select>
 </mapper>
