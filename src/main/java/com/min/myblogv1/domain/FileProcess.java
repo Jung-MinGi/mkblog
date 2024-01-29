@@ -50,6 +50,7 @@ public class FileProcess {
 
     public void copyObject(String key) {
         String destinationKey = key.substring(key.lastIndexOf("tempImage"));
+        destinationKey=destinationKey.replaceFirst("tempImage","Image");
         log.info("copyObject={}", destinationKey);
         CopyObjectRequest copyObjectRequest =CopyObjectRequest
                 .builder()
