@@ -28,11 +28,12 @@ public class DataAccessService {
     }
 
     public WriteForm formDataSave(WriteForm writeForm) throws IOException {
+        String tempContent = writeForm.getContent();
         //1.html 파싱후 image src 값 교체
         String content = htmlParse(writeForm.getContent());
         writeForm.setContent(content);
         //2.temp폴더 안에 내용 삭제
-        List<String> list = extractedKeyFromImageTag(writeForm.getContent());
+        List<String> list = extractedKeyFromImageTag(tempContent);
         for (String s : list) {
             fileProcess.deleteObject(s);
         }
