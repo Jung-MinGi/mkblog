@@ -51,7 +51,7 @@ public class DataAccessService {
             //여기서 파일 복사
             String key = src.substring(src.lastIndexOf("tempImage"));
             fileProcess.copyObject(key);
-            //
+
             src=src.replaceFirst("tempImage","Image");
 
             element.attr("src",src);
