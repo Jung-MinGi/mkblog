@@ -1,6 +1,7 @@
 package com.min.myblogv1.service;
 
 import com.min.myblogv1.domain.FileProcess;
+import com.min.myblogv1.domain.FindTextParamDTO;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.repository.mybatis.DataGetRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,10 @@ public class DataAccessService {
 
     public List<String> getTablesName() {
         return repository.getTablesName();
+    }
+
+    public WriteForm findTextByTitle(FindTextParamDTO findTextParamDTO){
+        return repository.findTextByTitle(findTextParamDTO.getCategory(),findTextParamDTO.getTitle());
     }
 
     public WriteForm formDataSave(WriteForm writeForm) throws IOException {

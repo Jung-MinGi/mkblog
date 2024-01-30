@@ -24,7 +24,7 @@ let index = {
 				contentType: "application/json; charset=utf-8",
 			}).done(function(resp){
 				alert("글 작성 완료되었습니다."+JSON.stringify(resp));
-				location.href = `/writeShow/${resp.category}/${resp.title}`;
+				location.href = `/view/${resp.category}/${resp.title}`;
 			}).fail(function(resp){
 			    const error = resp.responseJSON;
                 let defaultMessage = error[0].defaultMessage;

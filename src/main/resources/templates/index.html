@@ -72,11 +72,11 @@
                     let result = content[i];
                     //"/writeShow/{category}/{title}"
                     if(result.title.length>20){
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/writeShow/${result.category}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;
+                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }else{
 
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/writeShow/${result.category}/${result.title}">${result.title}</a></p></td>`;
+                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.title}">${result.title}</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }
                 }

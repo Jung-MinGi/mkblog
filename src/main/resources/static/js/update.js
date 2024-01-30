@@ -26,7 +26,7 @@ let updateIndex = {
 //				dataType: "json"
 			}).done(function(tmp){
 				alert(" 완료되었습니다.!!"+JSON.stringify(tmp));
-				location.href = `/writeShow/${tmp.category}/${tmp.title}`;
+				location.href = `/view/${tmp.category}/${tmp.title}`;
 			}).fail(function(error){
 				console.log(error);
 			});

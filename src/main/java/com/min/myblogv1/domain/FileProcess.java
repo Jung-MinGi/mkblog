@@ -68,7 +68,6 @@ public class FileProcess {
         String substring = originalFilename.substring(pos + 1);
         String string = UUID.randomUUID().toString();
         String n = string + "." + substring;
-        System.out.println("n = " + n);
         return n;
     }
 
