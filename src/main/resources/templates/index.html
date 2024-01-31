@@ -72,11 +72,13 @@
                     let result = content[i];
                     //"/writeShow/{category}/{title}"
                     if(result.title.length>20){
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;
+<!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;-->
+                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,20)}...</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }else{
 
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.title}">${result.title}</a></p></td>`;
+<!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title}</a></p></td>`;-->
+                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }
                 }
@@ -112,7 +114,7 @@
     });
 
     function createHtmlTag(tables){
-        alert("테이블 배열 0번쨰::"+tables[0]);
+<!--        alert("테이블 배열 0번쨰::"+tables[0]);-->
         let trTagNum = Math.ceil(tables.length/3);
         let idx=0;
         for(let i=0;i<trTagNum;i++){

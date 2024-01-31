@@ -36,5 +36,20 @@ class DataGetRepositoryImplTest {
         repository.save(writeForm);
         WriteForm result = repository.findTextByTitle(writeForm.getCategory(), writeForm.getTitle());
         assertThat(result.getTitle()).isEqualTo("title1");
+
+        //update
+        writeForm.setId(result.getId());
+        writeForm.setContent("update1");
+        repository.update(writeForm);
+        WriteForm updateResult = repository.findTextByTitle(writeForm.getCategory(), writeForm.getTitle());
+        assertThat(updateResult.getContent()).isEqualTo("update1");
+
+        //delete
+        repository.deleteById(writeForm.getCategory(), 1);
+        repository.resetAutoIncrement(writeForm.getCategory());
+        repository.setCountToZero();
+        repository.updateId(writeForm.getCategory());
+        assertThat(repository.findTextById(writeForm.getCategory(), 1)).isNotNull();
+
     }
 }

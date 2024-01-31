@@ -9,6 +9,15 @@ import java.util.List;
 public interface DataGetMapper {
     List<String> getTablesName();
     void save(WriteForm writeForm);
+    void update(WriteForm writeForm);
 
     WriteForm findTextByTitle(String category,String title);
+    WriteForm findTextById(String category,int id);
+    WriteForm findTextLatest(String category);
+
+    void deleteById(String category,int id);
+    void resetAutoIncrement(String category);
+    void setCountToZero();
+
+    void updateId(String category);
 }

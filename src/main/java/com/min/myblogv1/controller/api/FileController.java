@@ -2,6 +2,7 @@ package com.min.myblogv1.controller.api;
 
 import com.min.myblogv1.Path;
 import com.min.myblogv1.domain.FileProcess;
+import com.min.myblogv1.domain.UpdateParam;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.S3Client;
 
 import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -33,29 +35,9 @@ public class FileController {
 
     @PostMapping("/temp/upload")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
-//        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
-//        Path path = null;
-//        String key = "tempImage/" + fileProcess.getServerFileName(file.getOriginalFilename());
-//        System.out.println("key = " + key);
-//        PutObjectRequest objectRequest = fileProcess.getPutObjectRequest(key);
-//        System.out.println("objectRequest = " + objectRequest.bucket());
-//        RequestBody rb = fileProcess.getFileRequestBody(file);
-//        System.out.println("rb = " + rb.toString());
-//        s3.putObject(objectRequest, rb);
-//        String url = fileProcess.getUrl(key);
-//        System.out.println("url = " + url);
-//        log.info("url={}", url);
-//        path = new Path();
-//        path.setUrl(url);
-//        System.out.println("path.getUrl() = " + path.getUrl());
         return new ResponseEntity<>(fileProcess.fileUpload("tempImage", file), HttpStatus.OK);
     }
 
-    //        @PostMapping("/upload")
-//    public void upload( @RequestBody String formData) throws IOException {
-//
-//        log.info("formData={}", formData);
-//    }
     @PostMapping("/upload")
     public ResponseEntity<Object> upload(@Validated @RequestBody WriteForm formData, BindingResult bindingResult) throws IOException {
         log.info("WriteForm={}", formData);
@@ -64,9 +46,18 @@ public class FileController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         service.formDataSave(formData);
-
         return new ResponseEntity<>(formData, HttpStatus.OK);
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<Object> upload(@Validated @RequestBody UpdateParam updateParam, BindingResult bindingResult) throws IOException {
+        log.info("WriteForm={}", updateParam);
+        if (bindingResult.hasErrors()) {
+            log.info("formData={}", updateParam);
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        service.update(updateParam);
 
+        return new ResponseEntity<>(updateParam, HttpStatus.OK);
+    }
 }

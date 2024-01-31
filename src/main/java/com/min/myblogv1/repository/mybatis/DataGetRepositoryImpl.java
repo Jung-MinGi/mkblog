@@ -24,7 +24,42 @@ public class DataGetRepositoryImpl implements DataGetRepository {
     }
 
     @Override
+    public void update(WriteForm writeForm) {
+        mapper.update(writeForm);
+    }
+
+    @Override
     public WriteForm findTextByTitle(String category, String title) {
         return mapper.findTextByTitle(category,title);
+    }
+
+    @Override
+    public WriteForm findTextById(String category, int id) {
+        return mapper.findTextById(category,id);
+    }
+
+    @Override
+    public WriteForm findTextLatest(String category) {
+        return mapper.findTextLatest(category);
+    }
+
+    @Override
+    public void deleteById(String category, int id) {
+        mapper.deleteById(category,id);
+    }
+
+    @Override
+    public void resetAutoIncrement(String category) {
+        mapper.resetAutoIncrement(category);
+    }
+
+    @Override
+    public void setCountToZero() {
+        mapper.setCountToZero();
+    }
+
+    @Override
+    public void updateId(String category) {
+        mapper.updateId(category);
     }
 }

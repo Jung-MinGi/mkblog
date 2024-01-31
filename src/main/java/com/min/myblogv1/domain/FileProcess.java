@@ -49,9 +49,11 @@ public class FileProcess {
     }
 
     public void copyObject(String key) {
+        if(!key.contains(GlobalConst.FILE_TEMP)) return;
         String destinationKey = key.substring(key.lastIndexOf("tempImage"));
         destinationKey=destinationKey.replaceFirst("tempImage","Image");
         log.info("copyObject={}", destinationKey);
+
         CopyObjectRequest copyObjectRequest =CopyObjectRequest
                 .builder()
                 .sourceKey(key)
