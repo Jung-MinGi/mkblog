@@ -63,7 +63,7 @@
                 const content = response.list;
                 //title만들기
                 let tmp = document.querySelector(category);
-                let pTagTitle = `<p style="text-align: center; font-size: 25px;">${response.list[0].category}</p>`;
+                let pTagTitle = `<p style="font-size: 15px;">${response.list[0].category}</p>`;
                 tmp.insertAdjacentHTML('beforeend', pTagTitle);
 
                 for(var i=0; i<content.length; i++){
@@ -73,12 +73,14 @@
                     //"/writeShow/{category}/{title}"
                     if(result.title.length>20){
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;-->
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,20)}...</a></p></td>`;
+<!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,20)}...</a></p></td>`;-->
+                        let template = `<td><p"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,20)}...</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }else{
 
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title}</a></p></td>`;-->
-                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;
+<!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;-->
+                        let template = `<td><p><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }
                 }
@@ -87,9 +89,9 @@
     </script>
 
     <style>
-        td {
-        border:1px solid gray;
-        }
+<!--        td {-->
+<!--        border:1px solid gray;-->
+<!--        }-->
     </style>
 </head>
 <body>

@@ -8,7 +8,7 @@ let writeShowIndex={
     deleteById: function(){
     		 let id = $("#text-id").text();
     		 let category = $("#hid").val();
-            let url = "/api/delete/"+category+"/"+id+"";
+            let url = "/api/file/delete/"+category+"/"+id+"";
             alert("삭제하시겠습니까? 글 번호:"+url);
             $.ajax({
                 type: "post",

@@ -41,9 +41,6 @@ public class FileProcess {
         s3.putObject(objectRequest, rb);
         String url = getUrl(key);
         path.setUrl(url);
-//
-
-//
 //        s3.close();
         return path;
     }
@@ -69,8 +66,7 @@ public class FileProcess {
         int pos = originalFilename.lastIndexOf(".");
         String substring = originalFilename.substring(pos + 1);
         String string = UUID.randomUUID().toString();
-        String n = string + "." + substring;
-        return n;
+        return string + "." + substring;
     }
 
     public PutObjectRequest getPutObjectRequest(String key) {

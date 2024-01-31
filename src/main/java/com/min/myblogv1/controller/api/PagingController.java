@@ -21,7 +21,7 @@ public class PagingController {
 
     @GetMapping("page")
     public ResponseEntity<PageInfo<WriteForm>> getpage(@RequestParam(defaultValue = "1") Integer pageNum,
-                               @RequestParam(defaultValue = "5") Integer pageSize,
+                               @RequestParam(defaultValue = "10") Integer pageSize,
                                @RequestParam String tableName) {
         log.info("pageController= {} {} {}", pageNum, pageSize, tableName);
 

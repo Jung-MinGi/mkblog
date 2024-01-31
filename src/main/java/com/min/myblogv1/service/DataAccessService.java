@@ -9,13 +9,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 @Service
 public class DataAccessService {
 
@@ -79,10 +82,21 @@ public class DataAccessService {
             repository.update(writeForm);
         }else{
             //카테코리가 이전과 다르다면 이전 카테고리가 속한 db에서 삭제도 같이해야됨
-
+            repository.deleteById(updateParam.getPrevCategory(), updateParam.getId());
+            repository.update(writeForm);
         }
 
         return writeForm;
+    }
+
+    /**
+     * delete
+     */
+    public void deleteById(FindTextParam findTextParam){
+        repository.deleteById(findTextParam.getCategory(), findTextParam.getId());
+        repository.resetAutoIncrement(findTextParam.getCategory());
+        repository.setCountToZero();
+        repository.updateId(findTextParam.getCategory());
     }
 
     private String htmlParse(String bodyContent){
@@ -106,6 +120,7 @@ public class DataAccessService {
         }
         return body.html();
     }
+
     private List<String> extractedKeyFromImageTag(String bodyContent,String delim){
         ArrayList<String> list = new ArrayList<>();
         Element body = Jsoup.parse(bodyContent).body();

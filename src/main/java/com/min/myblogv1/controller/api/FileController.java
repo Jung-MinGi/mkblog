@@ -2,6 +2,7 @@ package com.min.myblogv1.controller.api;
 
 import com.min.myblogv1.Path;
 import com.min.myblogv1.domain.FileProcess;
+import com.min.myblogv1.domain.FindTextParam;
 import com.min.myblogv1.domain.UpdateParam;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.service.DataAccessService;
@@ -12,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.S3Client;
 
@@ -59,5 +57,11 @@ public class FileController {
         service.update(updateParam);
 
         return new ResponseEntity<>(updateParam, HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/{category}/{id}")
+    public void delete(@ModelAttribute FindTextParam findTextParam){
+        service.deleteById(findTextParam);
+        log.info("delete ={}",findTextParam.toString());
     }
 }
