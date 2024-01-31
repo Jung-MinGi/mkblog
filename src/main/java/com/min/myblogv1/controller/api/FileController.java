@@ -65,7 +65,7 @@ public class FileController {
         }
         service.formDataSave(formData);
 
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>(formData, HttpStatus.OK);
     }
 
 
