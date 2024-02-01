@@ -46,7 +46,7 @@
 				contentType: "application/json; charset=utf-8",
 //				dataType: "json"
 			}).done(function(response){
-				console.log(JSON.stringify(response));
+<!--				console.log(JSON.stringify(response));-->
 <!--				alert("tableName:"+response.list[0].category);-->
                 PAGE.paging(response,response.list[0].category,response.pages,response.pageNum,response.total,"getList");
 			    createTable(response);
@@ -116,8 +116,9 @@
     });
 
     function createHtmlTag(tables){
+    console.log(tables);
 <!--        alert("테이블 배열 0번쨰::"+tables[0]);-->
-        let trTagNum = Math.ceil(tables.length/3);
+        let trTagNum = Math.ceil(tables.length/5);
         let idx=0;
         for(let i=0;i<trTagNum;i++){
         //tr태그 생성
@@ -126,7 +127,7 @@
         let trId = arr[i];
         trElement.setAttribute("id",trId);
         document.getElementById('table-child').appendChild(trElement);
-            for(let j=0;j<3;j++){
+            for(let j=0;j<5;j++){
                 if(idx==tables.length)break;
                 let tdElement = document.createElement('td');
                 tdElement.style.width = "250px";
