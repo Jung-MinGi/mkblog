@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.min.myblogv1.repository.mapper.DataGetMapper">
     <select id="getTablesName" resultType="String">
-        show tables
+        select TABLE_NAME from INFORMATION_SCHEMA.tables where TABLE_SCHEMA = 'practice' and TABLE_NAME not like 'member';
     </select>
 
     <insert id="save">

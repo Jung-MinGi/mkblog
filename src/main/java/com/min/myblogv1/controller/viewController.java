@@ -5,15 +5,13 @@ import com.min.myblogv1.domain.FindTextParamDTO;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.service.DataAccessService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,8 +27,8 @@ public class viewController {
     @GetMapping("/image")//글 작성 페이지로 이동 핸들러
     public String summer(HttpServletRequest request,Model model) {
         List<String> tablesName = service.getTablesName();
-            HttpSession session = request.getSession(false);
-            session.setAttribute("login","wjdalsrl1234");
+//            HttpSession session = request.getSession(false);
+//            session.setAttribute("login","wjdalsrl1234");
         model.addAttribute("tables", tablesName);
         return "board";
     }
@@ -77,5 +75,31 @@ public class viewController {
         model.addAttribute("tables", list);
         model.addAttribute("contents", text);
         return "update";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model,HttpServletRequest request,HttpServletResponse response,@RequestParam(required = false) String redirectURL){
+        if(request.getSession(false)==null){
+            log.info("session id={}",request.getSession(false));
+            HttpSession session = request.getSession();
+            log.info("redirectURL={}",redirectURL);
+            model.addAttribute("url",redirectURL);
+            return "login";
+        }
+        System.out.println("redirectURL = " + redirectURL);
+        return "redirect:"+redirectURL;
+    }
+    @PostMapping("/login")
+    public String loginPagePost(Model model,HttpServletRequest request,HttpServletResponse response,@RequestParam(required = false) String redirectURL){
+        log.info("post로 들어온 로그인 요청입니다={}",redirectURL);
+        if(request.getSession(false)==null){
+            log.info("session id={}",request.getSession(false));
+            HttpSession session = request.getSession();
+            log.info("redirectURL={}",redirectURL);
+            model.addAttribute("url",redirectURL);
+            return "login";
+        }
+        System.out.println("redirectURL = " + redirectURL);
+        return "redirect:"+redirectURL;
     }
 }
