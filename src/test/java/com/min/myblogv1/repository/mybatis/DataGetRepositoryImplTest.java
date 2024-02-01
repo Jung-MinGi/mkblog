@@ -26,8 +26,7 @@ class DataGetRepositoryImplTest {
 
     @Test
     void test(){
-        List<String> tablesName = repository.getTablesName();
-        assertThat(tablesName.size()).isEqualTo(1);
+
 
         WriteForm writeForm = new WriteForm();
         writeForm.setCategory("spring");

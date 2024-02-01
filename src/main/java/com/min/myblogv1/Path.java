@@ -6,3 +6,4 @@ import lombok.Data;
 public class Path {
     private String url;
 }
+
