@@ -1,15 +1,13 @@
 package com.min.myblogv1.repository.mybatis;
 
 import com.min.myblogv1.domain.WriteForm;
+import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import com.min.myblogv1.repository.mapper.DataGetMapper;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -44,11 +42,12 @@ class DataGetRepositoryImplTest {
         assertThat(updateResult.getContent()).isEqualTo("update1");
 
         //delete
-        repository.deleteById(writeForm.getCategory(), 1);
-        repository.resetAutoIncrement(writeForm.getCategory());
-        repository.setCountToZero();
-        repository.updateId(writeForm.getCategory());
-        assertThat(repository.findTextById(writeForm.getCategory(), 1)).isNotNull();
+        WriteForm textLatest1 = repository.findTextLatest(writeForm.getCategory());
+        System.out.println("textLatest1 = " + textLatest1);
+        repository.deleteById(writeForm.getCategory(), textLatest1.getId());
+        WriteForm textLatest = repository.findTextLatest(writeForm.getCategory());
+        System.out.println("textLatest = " + textLatest);
+        assertThat(textLatest.getTitle()).isNotEqualTo("title1");
 
     }
 }

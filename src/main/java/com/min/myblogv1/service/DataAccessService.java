@@ -94,9 +94,9 @@ public class DataAccessService {
      */
     public void deleteById(FindTextParam findTextParam){
         repository.deleteById(findTextParam.getCategory(), findTextParam.getId());
-        repository.resetAutoIncrement(findTextParam.getCategory());
-        repository.setCountToZero();
-        repository.updateId(findTextParam.getCategory());
+//        repository.resetAutoIncrement(findTextParam.getCategory());
+//        repository.setCountToZero();
+//        repository.updateId(findTextParam.getCategory());
     }
 
     private String htmlParse(String bodyContent){

@@ -1,9 +1,7 @@
 package com.min.myblogv1.repository.mybatis;
 
 import com.min.myblogv1.domain.WriteForm;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 
 import java.util.List;
 

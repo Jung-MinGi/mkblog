@@ -1,6 +1,7 @@
 package com.min.myblogv1.repository.mapper;
 
 import com.min.myblogv1.domain.WriteForm;
+import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
