@@ -8,13 +8,12 @@ let writeShowIndex={
     deleteById: function(){
     		 let id = $("#text-id").text();
     		 let category = $("#hid").val();
-            let url = "/api/file/delete/"+category+"/"+id+"";
+            let url = "/api/file/"+category+"/"+id+"";
             alert("삭제하시겠습니까? 글 번호:"+url);
             $.ajax({
-                type: "post",
+                type: "delete",
                 url: url,
-                contentType: "application/json; charset=utf-8",
-
+                contentType: "application/json; charset=utf-8"
             }).done(function(result){
                 location.href="/";
             }).fail(function(error){

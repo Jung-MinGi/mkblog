@@ -59,7 +59,7 @@ public class FileController {
         return new ResponseEntity<>(updateParam, HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{category}/{id}")
+    @DeleteMapping("/{category}/{id}")
     public void delete(@ModelAttribute FindTextParam findTextParam){
         service.deleteById(findTextParam);
         log.info("delete ={}",findTextParam.toString());

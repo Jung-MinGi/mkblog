@@ -10,8 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-//        registry.addInterceptor(new LoginValidationInterceptor())
-//                .addPathPatterns("/update/**")
-//                .order(1);
+        registry.addInterceptor(new LoginValidationInterceptor())
+                .addPathPatterns("/update/**")
+                .order(1);
     }
 }
