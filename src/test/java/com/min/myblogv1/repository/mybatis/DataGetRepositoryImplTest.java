@@ -60,7 +60,7 @@ class DataGetRepositoryImplTest {
     @DisplayName("회원 체크 테스트")
     public void memberTest(){
 
-        assertThat(repository.findByUsername(new LoginFormDTO("tset1","test!")).getAuthority()).isEqualTo("admin");
+        assertThat(repository.findByUsername(new LoginFormDTO("test1","test!")).getAuthority()).isEqualTo("admin");
         UserDTO test = repository.findByUsername(new LoginFormDTO("test","qqq"));
         assertThatThrownBy(()->test.getAuthority())
                 .isInstanceOf(NullPointerException.class);
