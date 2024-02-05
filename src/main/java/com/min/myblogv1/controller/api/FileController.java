@@ -34,16 +34,22 @@ public class FileController {
     }
 
     @GetMapping("/{category}/{id}")
-    public ResponseEntity<Object> getText(@PathVariable String category,@PathVariable int id,@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user){
+    public ResponseEntity<Object> getText(@PathVariable String category,@PathVariable int id
+            ,@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user
+            ,@SessionAttribute(name = GlobalConst.LOGIN_USER_PW,required = false)String pw){
         if(user==null){
             log.info("binding error");
             return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        }
+        UserDTO dto = service.findUser(new LoginFormDTO(user,pw));
+        if(dto==null||dto.getAuthority()==null){
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+
         }
         FindTextParam findTextParam = new FindTextParam();
         findTextParam.setCategory(category);
         findTextParam.setId(id);
 
-        log.info("findTextParam={}",findTextParam.toString());
          return new ResponseEntity<>(findTextParam,HttpStatus.OK);
     }
     @PostMapping("/upload")
@@ -77,13 +83,18 @@ public class FileController {
 
     @DeleteMapping("/{category}/{id}")
     public ResponseEntity<String> delete(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user
-            , @ModelAttribute FindTextParam findTextParam) {
+            , @ModelAttribute FindTextParam findTextParam
+            ,@SessionAttribute(name = GlobalConst.LOGIN_USER_PW,required = false)String pw) {
 
         if(user==null){
             log.info("binding error");
             return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
         }
-        //refactor필요@@@@@@@@@@⬆️
+        UserDTO dto = service.findUser(new LoginFormDTO(user,pw));
+        if(dto==null||dto.getAuthority()==null){
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+
+        }
         service.deleteById(findTextParam);
         log.info("delete ={}", findTextParam.toString());
         return new ResponseEntity<>("삭제 했습니다", HttpStatus.OK);

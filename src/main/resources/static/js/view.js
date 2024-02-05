@@ -11,14 +11,14 @@ let writeShowIndex={
     deleteById: function(){
     		 let id = $("#text-id").text();
     		 let category = $("#hid").val();
-            let url = "/api/file/"+category+"/"+id+"";
-            alert("삭제하시겠습니까? 글 번호:"+url);
+            let url = "/api/file/"+category+"/"+id;
+            alert("삭제하시겠습니까?");
             $.ajax({
                 type: "delete",
                 url: url,
                 contentType: "application/json; charset=utf-8"
             }).done(function(result){
-                alert(result.responseText);
+
                 location.href="/";
             }).fail(function(error){
                 alert(error.responseText);
@@ -33,7 +33,7 @@ let writeShowIndex={
                 contentType: "application/json; charset=utf-8"
             }).done(function(result){
                  console.log(result);
-//                location.href="/";
+                location.href="/update/"+category+"/"+id
             }).fail(function(error){
              alert(error.responseText);
             });
