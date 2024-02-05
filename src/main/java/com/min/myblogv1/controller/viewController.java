@@ -51,18 +51,8 @@ public class viewController {
 
     @GetMapping("/update/{category}/{id}")//글 수정페이지로 이동하는 핸들러
     public String updateForm(@PathVariable("id") int id
-            , @PathVariable("category") String category,
-                             Model model,
-                             @SessionAttribute(name = GlobalConst.LOGIN_USER, required = false) String username) {
-        //refactor필요@@@@@@@@@@⬇️
-        if (!username.equals("wjdalsrl")) {
-            return "redirect:/view/{category}/{id}";
-        }
-//        if(username == null){
-//            bindingResult.addError(new ObjectError("username","권한이 없습니다"));
-//            return "redirect:/view/"+category+"/"+id;
-//        }
-        //refactor필요@@@@@@@@@@⬆️
+            , @PathVariable("category") String category,Model model) {
+
         List<String> list = service.getTablesName();
         FindTextParam dto = new FindTextParam();
         dto.setId(id);
@@ -89,8 +79,9 @@ public class viewController {
             model.addAttribute("member", new LoginFormDTO());
             return "login";
         }
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         session.setAttribute(GlobalConst.LOGIN_USER, dto.getUsername());
+        session.setAttribute(GlobalConst.LOGIN_USER_PW, dto.getPw());
         if (redirectURL == null) return "index";
         return "redirect:" + redirectURL;
     }

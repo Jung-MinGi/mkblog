@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,9 @@ public class DataAccessService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
+    public UserDTO findUser(LoginFormDTO loginFormDTO){
+        return repository.findByUsername(loginFormDTO);
+    }
     public WriteForm findTextById(FindTextParam findTextParam){
         return repository.findTextById(findTextParam.getCategory(), findTextParam.getId());
     }
@@ -94,9 +96,6 @@ public class DataAccessService {
      */
     public void deleteById(FindTextParam findTextParam){
         repository.deleteById(findTextParam.getCategory(), findTextParam.getId());
-//        repository.resetAutoIncrement(findTextParam.getCategory());
-//        repository.setCountToZero();
-//        repository.updateId(findTextParam.getCategory());
     }
 
     private String htmlParse(String bodyContent){

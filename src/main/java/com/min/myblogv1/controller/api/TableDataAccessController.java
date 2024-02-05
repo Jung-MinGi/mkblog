@@ -3,6 +3,8 @@ package com.min.myblogv1.controller.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.myblogv1.Path;
 import com.min.myblogv1.domain.GlobalConst;
+import com.min.myblogv1.domain.LoginFormDTO;
+import com.min.myblogv1.domain.UserDTO;
 import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +41,15 @@ public class TableDataAccessController {
     }
 
     @GetMapping("/board")
-    public ResponseEntity<String> boardPage(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user){
+    public ResponseEntity<String> boardPage(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user
+    ,@SessionAttribute(name = GlobalConst.LOGIN_USER_PW,required = false)String pw){
         if(user==null){
             return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        }
+        UserDTO dto = service.findUser(new LoginFormDTO(user,pw));
+        if(dto==null||dto.getAuthority()==null){
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+
         }
         return new ResponseEntity<>("", HttpStatus.OK);
 

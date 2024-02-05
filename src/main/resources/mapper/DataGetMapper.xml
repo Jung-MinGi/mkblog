@@ -25,20 +25,11 @@
         update ${category} set category=#{category}, title=#{title}, content=#{content} where id=#{id};
     </update>
 
-<!--    <update id="resetAutoIncrement">-->
-<!--&lt;!&ndash;        ALTER table ${category} AUTO_INCREMENT=1&ndash;&gt;-->
-<!--        ALTER TABLE ${category} ALTER COLUMN id set default 1;-->
-<!--    </update>-->
-
-<!--    <update id="setCountToZero">-->
-<!--        set @count=0-->
-<!--    </update>-->
-
-<!--    <update id="updateId">-->
-<!--        update ${category} set id=@count:=@count+1-->
-<!--    </update>-->
-
     <update id="deleteById">
         update ${category} set deleted='true' where id=#{id}
     </update>
+
+    <select id="findByUsername" resultType="UserDTO">
+        select * from member where username=#{username} and pw=#{pw}
+    </select>
 </mapper>

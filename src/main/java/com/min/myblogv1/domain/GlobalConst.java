@@ -1,7 +1,8 @@
 package com.min.myblogv1.domain;
 
 public interface GlobalConst {
-    public static final String FILE_TEMP="tempImage";
-    public static final String FILE="Image";
+    String FILE_TEMP="tempImage";
+    String FILE="Image";
     String  LOGIN_USER="loginUser";
+    String LOGIN_USER_PW="loginUserPw";
 }

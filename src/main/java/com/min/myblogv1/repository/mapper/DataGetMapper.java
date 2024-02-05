@@ -1,5 +1,7 @@
 package com.min.myblogv1.repository.mapper;
 
+import com.min.myblogv1.domain.LoginFormDTO;
+import com.min.myblogv1.domain.UserDTO;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,8 +19,5 @@ public interface DataGetMapper {
     WriteForm findTextLatest(String category);
 
     void deleteById(String category,int id);
-    void resetAutoIncrement(String category);
-    void setCountToZero();
-
-    void updateId(String category);
+    UserDTO findByUsername(LoginFormDTO loginFormDTO);
 }

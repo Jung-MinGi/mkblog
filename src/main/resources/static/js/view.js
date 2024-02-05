@@ -21,15 +21,12 @@ let writeShowIndex={
                 alert(result.responseText);
                 location.href="/";
             }).fail(function(error){
-             console.log(error);
                 alert(error.responseText);
             });
     		},
     update: function(){
     		 let id = $("#text-id").text();
     		 let category = $("#hid").val();
-//            let url = "/api/file/"+category+"/"+id+"";
-//            console.log("수정페이지로 이동? 글 번호:"+id+", "+category);
             $.ajax({
                 type: "get",
                 url: "/api/file/"+category+"/"+id,

@@ -1,16 +1,21 @@
 package com.min.myblogv1.repository.mybatis;
 
+import com.min.myblogv1.domain.LoginFormDTO;
+import com.min.myblogv1.domain.UserDTO;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import com.min.myblogv1.repository.mapper.DataGetMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.jdbc.Null;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.*;
-
+@Slf4j
 @MybatisTest
 @ActiveProfiles("test")
 class DataGetRepositoryImplTest {
@@ -49,5 +54,15 @@ class DataGetRepositoryImplTest {
         System.out.println("textLatest = " + textLatest);
         assertThat(textLatest.getTitle()).isNotEqualTo("title1");
 
+    }
+
+    @Test
+    @DisplayName("회원 체크 테스트")
+    public void memberTest(){
+
+        assertThat(repository.findByUsername(new LoginFormDTO("tset1","test!")).getAuthority()).isEqualTo("admin");
+        UserDTO test = repository.findByUsername(new LoginFormDTO("test","qqq"));
+        assertThatThrownBy(()->test.getAuthority())
+                .isInstanceOf(NullPointerException.class);
     }
 }

@@ -1,5 +1,7 @@
 package com.min.myblogv1.repository.mybatis;
 
+import com.min.myblogv1.domain.LoginFormDTO;
+import com.min.myblogv1.domain.UserDTO;
 import com.min.myblogv1.domain.WriteForm;
 import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import com.min.myblogv1.repository.mapper.DataGetMapper;
@@ -50,17 +52,8 @@ public class DataGetRepositoryImpl implements DataGetRepository {
     }
 
     @Override
-    public void resetAutoIncrement(String category) {
-        mapper.resetAutoIncrement(category);
+    public UserDTO findByUsername(LoginFormDTO loginFormDTO) {
+        return mapper.findByUsername(loginFormDTO);
     }
 
-    @Override
-    public void setCountToZero() {
-        mapper.setCountToZero();
-    }
-
-    @Override
-    public void updateId(String category) {
-        mapper.updateId(category);
-    }
 }
