@@ -1,10 +1,7 @@
 package com.min.myblogv1.controller.api;
 
 import com.min.myblogv1.Path;
-import com.min.myblogv1.domain.FileProcess;
-import com.min.myblogv1.domain.FindTextParam;
-import com.min.myblogv1.domain.UpdateParam;
-import com.min.myblogv1.domain.WriteForm;
+import com.min.myblogv1.domain.*;
 import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +33,19 @@ public class FileController {
         return new ResponseEntity<>(fileProcess.fileUpload("tempImage", file), HttpStatus.OK);
     }
 
+    @GetMapping("/{category}/{id}")
+    public ResponseEntity<Object> getText(@PathVariable String category,@PathVariable int id,@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user){
+        if(user==null){
+            log.info("binding error");
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        }
+        FindTextParam findTextParam = new FindTextParam();
+        findTextParam.setCategory(category);
+        findTextParam.setId(id);
+
+        log.info("findTextParam={}",findTextParam.toString());
+         return new ResponseEntity<>(findTextParam,HttpStatus.OK);
+    }
     @PostMapping("/upload")
     public ResponseEntity<Object> upload(@Validated @RequestBody WriteForm formData, BindingResult bindingResult) throws IOException {
         log.info("WriteForm={}", formData);
@@ -47,6 +57,12 @@ public class FileController {
         return new ResponseEntity<>(formData, HttpStatus.OK);
     }
 
+    /**
+     * @param updateParam
+     * @param bindingResult 가 먼저 작동해서 앞에 객체에 바인딩후 @Validated가 검증순서
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/update")
     public ResponseEntity<Object> upload(@Validated @RequestBody UpdateParam updateParam, BindingResult bindingResult) throws IOException {
         log.info("WriteForm={}", updateParam);
@@ -60,8 +76,16 @@ public class FileController {
     }
 
     @DeleteMapping("/{category}/{id}")
-    public void delete(@ModelAttribute FindTextParam findTextParam){
+    public ResponseEntity<String> delete(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user
+            , @ModelAttribute FindTextParam findTextParam) {
+
+        if(user==null){
+            log.info("binding error");
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        }
+        //refactor필요@@@@@@@@@@⬆️
         service.deleteById(findTextParam);
-        log.info("delete ={}",findTextParam.toString());
+        log.info("delete ={}", findTextParam.toString());
+        return new ResponseEntity<>("삭제 했습니다", HttpStatus.OK);
     }
 }

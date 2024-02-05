@@ -3,6 +3,9 @@ let writeShowIndex={
         	$("#btn-delete").on("click", ()=>{
         				this.deleteById();
         			});
+            $("#btn-update").on("click", ()=>{
+                this.update();
+            });
     },
 
     deleteById: function(){
@@ -15,9 +18,27 @@ let writeShowIndex={
                 url: url,
                 contentType: "application/json; charset=utf-8"
             }).done(function(result){
+                alert(result.responseText);
                 location.href="/";
             }).fail(function(error){
-                alert(JSON.stringify(error));
+             console.log(error);
+                alert(error.responseText);
+            });
+    		},
+    update: function(){
+    		 let id = $("#text-id").text();
+    		 let category = $("#hid").val();
+//            let url = "/api/file/"+category+"/"+id+"";
+//            console.log("수정페이지로 이동? 글 번호:"+id+", "+category);
+            $.ajax({
+                type: "get",
+                url: "/api/file/"+category+"/"+id,
+                contentType: "application/json; charset=utf-8"
+            }).done(function(result){
+                 console.log(result);
+//                location.href="/";
+            }).fail(function(error){
+             alert(error.responseText);
             });
     		}
 }

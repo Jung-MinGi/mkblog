@@ -2,16 +2,14 @@ package com.min.myblogv1.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.myblogv1.Path;
+import com.min.myblogv1.domain.GlobalConst;
 import com.min.myblogv1.service.DataAccessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -40,4 +38,12 @@ public class TableDataAccessController {
         return service.getTablesName();
     }
 
+    @GetMapping("/board")
+    public ResponseEntity<String> boardPage(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user){
+        if(user==null){
+            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+
+    }
 }

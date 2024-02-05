@@ -1,8 +1,10 @@
 package com.min.myblogv1.interceptor;
 
+import com.min.myblogv1.domain.GlobalConst;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,17 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Enumeration;
 
 @Slf4j
+
 public class LoginValidationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(false);
         if(session == null){
             log.info("비회원 요청 입니다");
+//            HttpSession session1 = request.getSession();
+//            response.setHeader("type","post");
             response.sendRedirect("/login?redirectURL="+request.getRequestURI().replaceFirst("update","view"));
             return false;
         }
-            log.info("URI={}",request.getRequestURI());
-            log.info("URL={}",request.getRequestURL());
 
         return true;
     }
