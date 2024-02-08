@@ -18,7 +18,6 @@ let writeShowIndex={
                 url: url,
                 contentType: "application/json; charset=utf-8"
             }).done(function(result){
-
                 location.href="/";
             }).fail(function(error){
                 alert(error.responseText);

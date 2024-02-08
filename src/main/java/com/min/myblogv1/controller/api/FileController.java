@@ -52,7 +52,7 @@ public class FileController {
 
          return new ResponseEntity<>(findTextParam,HttpStatus.OK);
     }
-    @PostMapping("/upload")
+    @PostMapping
     public ResponseEntity<Object> upload(@Validated @RequestBody WriteForm formData, BindingResult bindingResult) throws IOException {
         log.info("WriteForm={}", formData);
         if (bindingResult.hasErrors()) {
@@ -69,8 +69,8 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/update")
-    public ResponseEntity<Object> upload(@Validated @RequestBody UpdateParam updateParam, BindingResult bindingResult) throws IOException {
+    @PutMapping
+    public ResponseEntity<Object> update(@Validated @RequestBody UpdateParam updateParam, BindingResult bindingResult) throws IOException {
         log.info("WriteForm={}", updateParam);
         if (bindingResult.hasErrors()) {
             log.info("formData={}", updateParam);

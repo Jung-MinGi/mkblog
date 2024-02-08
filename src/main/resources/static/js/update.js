@@ -19,8 +19,8 @@ let updateIndex = {
 			};
             alert(JSON.stringify(data))
 			$.ajax({
-				type: "POST",
-				url: "/api/file/update",
+				type: "PUT",
+				url: "/api/file",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 //				dataType: "json"

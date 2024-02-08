@@ -19,7 +19,7 @@ let index = {
 
 			$.ajax({
 				type: "POST",
-				url: "/api/file/upload",
+				url: "/api/file",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 			}).done(function(resp){
