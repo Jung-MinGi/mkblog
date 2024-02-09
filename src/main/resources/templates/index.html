@@ -74,13 +74,13 @@
                     if(result.title.length>25){
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title.substr(0,20)}...</a></p></td>`;-->
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,20)}...</a></p></td>`;-->
-                        let template = `<td><p"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,26)}...</a></p></td>`;
+                        let template = `<td style="height: 30px;"><p"><a href="/view/${result.category}/${result.id}">${result.title.substr(0,26)}...</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }else{
 
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}/${result.title}">${result.title}</a></p></td>`;-->
 <!--                        let template = `<td><p style="margin: 10px 10px;"><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;-->
-                        let template = `<td><p><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;
+                        let template = `<td style="height: 30px;"><p><a href="/view/${result.category}/${result.id}">${result.title}</a></p></td>`;
                         element.insertAdjacentHTML('beforeend', template);
                     }
                 }

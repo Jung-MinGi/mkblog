@@ -17,7 +17,6 @@ let updateIndex = {
 			        title: $("#title").val(),
 					content: $("#summernote").val()
 			};
-            alert(JSON.stringify(data))
 			$.ajax({
 				type: "PUT",
 				url: "/api/file",
@@ -25,7 +24,7 @@ let updateIndex = {
 				contentType: "application/json; charset=utf-8",
 //				dataType: "json"
 			}).done(function(tmp){
-				alert(" 완료되었습니다.!!"+JSON.stringify(tmp));
+				alert(" 완료되었습니다.!!");
 				location.href = `/view/${tmp.category}/${tmp.id}`;
 			}).fail(function(error){
 				console.log(error);

@@ -28,7 +28,7 @@ public class FileController {
     private String bucketName;
 
 
-    @PostMapping("/temp/upload")
+    @PostMapping("/temp")
     public ResponseEntity<Path> tempImageSave(MultipartFile file) throws IOException {
         return new ResponseEntity<>(fileProcess.fileUpload("tempImage", file), HttpStatus.OK);
     }
@@ -49,8 +49,8 @@ public class FileController {
         FindTextParam findTextParam = new FindTextParam();
         findTextParam.setCategory(category);
         findTextParam.setId(id);
-
-         return new ResponseEntity<>(findTextParam,HttpStatus.OK);
+        return ResponseEntity.ok(findTextParam);
+//         return new ResponseEntity<>(findTextParam,HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<Object> upload(@Validated @RequestBody WriteForm formData, BindingResult bindingResult) throws IOException {
@@ -60,7 +60,8 @@ public class FileController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         service.formDataSave(formData);
-        return new ResponseEntity<>(formData, HttpStatus.OK);
+        return ResponseEntity.ok(formData);
+//        return new ResponseEntity<>(formData, HttpStatus.OK);
     }
 
     /**
@@ -77,8 +78,8 @@ public class FileController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         service.update(updateParam);
-
-        return new ResponseEntity<>(updateParam, HttpStatus.OK);
+        return ResponseEntity.ok(updateParam);
+//        return new ResponseEntity<>(updateParam, HttpStatus.OK);
     }
 
     @DeleteMapping("/{category}/{id}")
@@ -97,6 +98,7 @@ public class FileController {
         }
         service.deleteById(findTextParam);
         log.info("delete ={}", findTextParam.toString());
-        return new ResponseEntity<>("삭제 했습니다", HttpStatus.OK);
+        return ResponseEntity.ok("삭제 했습니다");
+//        return new ResponseEntity<>("삭제 했습니다", HttpStatus.OK);
     }
 }

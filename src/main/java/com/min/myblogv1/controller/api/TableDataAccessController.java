@@ -36,22 +36,21 @@ public class TableDataAccessController {
     private String bucketName;
 
     @GetMapping("/tables")
-    public List<String> getAllTablesName(){
+    public List<String> getAllTablesName() {
         return service.getTablesName();
     }
 
     @GetMapping("/board")
-    public ResponseEntity<String> boardPage(@SessionAttribute(name = GlobalConst.LOGIN_USER,required = false) String user
-    ,@SessionAttribute(name = GlobalConst.LOGIN_USER_PW,required = false)String pw){
-        if(user==null){
-            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+    public ResponseEntity<String> boardPage(@SessionAttribute(name = GlobalConst.LOGIN_USER, required = false) String user
+            , @SessionAttribute(name = GlobalConst.LOGIN_USER_PW, required = false) String pw) {
+        if (user == null) {
+            return new ResponseEntity<>("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
-        UserDTO dto = service.findUser(new LoginFormDTO(user,pw));
-        if(dto==null||dto.getAuthority()==null){
-            return new ResponseEntity<>("권한이 없습니다.",HttpStatus.FORBIDDEN);
+        UserDTO dto = service.findUser(new LoginFormDTO(user, pw));
+        if (dto == null || dto.getAuthority() == null) {
+            return new ResponseEntity<>("권한이 없습니다.", HttpStatus.FORBIDDEN);
 
         }
-        return new ResponseEntity<>("", HttpStatus.OK);
-
+        return ResponseEntity.ok("");
     }
 }
