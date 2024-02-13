@@ -17,7 +17,8 @@ const PAGE={
         let prevBlockPageNo  = (blockNo-1)*pageBlock-1;
         let nextBlockPageNo  = blockNo*pageBlock;
 
-        let strHTML="<p>";
+//        let strHTML="<p>";
+        let strHTML="";
 
         if(response.hasPreviousPage){
             strHTML+="<li><a href='javascript:"+fn+"(\""+category+"\","+(pageNo-1)+");'><span>prev</span></a></li>"
@@ -25,7 +26,8 @@ const PAGE={
 
         for(let i = startBlockNumInCurrentPage; i<=endBlockNumInCurrentPage; i++){
             if(i==pageNo){
-                strHTML+= "<li class='active'><a href='javascript:"+fn+"(\""+category+"\","+i+");'>"+i+"</a></li>";
+//                strHTML+= "<li class='active'><a href='javascript:"+fn+"(\""+category+"\","+i+");'>"+i+"</a></li>";
+                strHTML+= "<li><a href='javascript:"+fn+"(\""+category+"\","+i+");'>"+i+"</a></li>";
             }else{
             strHTML += "<li><a href='javascript:"+fn+"(\""+category+"\","+i+");'>"+i+"</a></li>";
             }
@@ -33,7 +35,7 @@ const PAGE={
         if(response.hasNextPage){
             strHTML+="<li><a href='javascript:"+fn+"(\""+category+"\","+(pageNo+1)+");'><span>next</span></a></li>"
         }
-        strHTML+="</p>";
+//        strHTML+="</p>";
         let element = document.querySelector('#pagingArea-'+category);
         element.innerHTML = strHTML;
 
