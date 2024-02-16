@@ -85,10 +85,10 @@ public class DataAccessService {
         }else{
             //카테코리가 이전과 다르다면 이전 카테고리가 속한 db에서 삭제도 같이해야됨
             repository.deleteById(updateParam.getPrevCategory(), updateParam.getId());
-            repository.update(writeForm);
+//            repository.update(writeForm);
+            repository.save(writeForm);
         }
-
-        return writeForm;
+       return repository.findTextByTitle(writeForm.getCategory(), writeForm.getTitle());
     }
 
     /**

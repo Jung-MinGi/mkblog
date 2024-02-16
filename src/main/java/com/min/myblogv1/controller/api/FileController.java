@@ -77,9 +77,7 @@ public class FileController {
             log.info("formData={}", updateParam);
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        service.update(updateParam);
-        return ResponseEntity.ok(updateParam);
-//        return new ResponseEntity<>(updateParam, HttpStatus.OK);
+        return ResponseEntity.ok(service.update(updateParam));
     }
 
     @DeleteMapping("/{category}/{id}")
