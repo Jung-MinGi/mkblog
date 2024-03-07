@@ -3,10 +3,8 @@ package com.min.myblogv1.repository.mybatis;
 import com.min.myblogv1.domain.LoginFormDTO;
 import com.min.myblogv1.domain.UserDTO;
 import com.min.myblogv1.domain.WriteForm;
-import com.min.myblogv1.domain.IncludeDeletedColumnWriteForm;
 import com.min.myblogv1.repository.mapper.DataGetMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.jdbc.Null;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +12,8 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Slf4j
 @MybatisTest
 @ActiveProfiles("test")
@@ -29,7 +28,7 @@ class DataGetRepositoryImplTest {
 
     @Test
     void test(){
-
+        
 
         WriteForm writeForm = new WriteForm();
         writeForm.setCategory("spring");
@@ -48,10 +47,8 @@ class DataGetRepositoryImplTest {
 
         //delete
         WriteForm textLatest1 = repository.findTextLatest(writeForm.getCategory());
-        System.out.println("textLatest1 = " + textLatest1);
         repository.deleteById(writeForm.getCategory(), textLatest1.getId());
         WriteForm textLatest = repository.findTextLatest(writeForm.getCategory());
-        System.out.println("textLatest = " + textLatest);
         assertThat(textLatest.getTitle()).isNotEqualTo("title1");
 
     }
