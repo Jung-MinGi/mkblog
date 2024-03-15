@@ -12,7 +12,13 @@ let writeShowIndex={
     		 let id = $("#text-id").text();
     		 let category = $("#hid").val();
             let url = "/api/file/"+category+"/"+id;
-            alert("삭제하시겠습니까?");
+            var result = confirm("삭제하시겠습니까?");
+           if(result){
+            alert("삭제완료");
+           }else {
+            alert("삭제취소");
+            return;
+           }
             $.ajax({
                 type: "delete",
                 url: url,
