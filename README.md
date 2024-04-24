@@ -7,7 +7,7 @@ https://github.com/Jung-MinGi/mkblog/assets/118701129/d1271b9e-c5b3-49db-aa89-e4
 <h3>글 작성 페이지</h3>
 <img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/31499540-bdc7-42c7-96cb-779d7c4705c6" alt="image" width="750">
 
-/* 글 작성시 이미지는 s3에 저장되고 데이터베이스에는 s3에 저장되 객체의 링크만 저장됩니다.
+/* 글 작성시 이미지는 s3에 저장되고 데이터베이스에는 s3에 저장된 이미지 객체의 링크만 저장됩니다.
 */
 
 <h3>글 상세 페이지 </h3>
