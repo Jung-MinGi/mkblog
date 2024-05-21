@@ -25,11 +25,13 @@
 
 - 글 작성 페이지
   - 이미지 첨부시 바이너리파일은 s3에 저장, DB에는 버킷경로를 담게 구현했습니다.
+  - 로그인 사용자만 글 등록 가능
   - <img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/31499540-bdc7-42c7-96cb-779d7c4705c6" alt="image" width="600">
 <br>
 
 - 글 상세 페이지
   - 글 수정,삭제기능
+  - 해당 글 작성자만 수정,삭제가능
   - <img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/a044a355-cff7-4f32-a7c4-ed5925cf629a" alt="image" width="600">
   - <img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/e813f9c1-8908-473d-9f83-ff20e0371486" alt="image" width="600">
   <br>
