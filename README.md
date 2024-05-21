@@ -17,14 +17,15 @@
 <h2>이미지</h2>
 
 - 메인화면
-  - 
+  - 카테고리별로 글 목록 분리
   - 페이징 처리와 글 등록시 최신순 정렬
     
-https://github.com/Jung-MinGi/mkblog/assets/118701129/d1271b9e-c5b3-49db-aa89-e4c9b885dee3
+<img src="https://github.com/Jung-MinGi/portfolio/assets/118701129/4d96fc77-89e1-469d-86f7-dc1d8d45e9bc" alt="image" width="600">
+
 
 - 글 작성 페이지
   
-<img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/31499540-bdc7-42c7-96cb-779d7c4705c6" alt="image" width="500">
+<img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/31499540-bdc7-42c7-96cb-779d7c4705c6" alt="image" width="600">
 
 * 글 작성시 이미지는 s3에 저장되고 데이터베이스에는 s3에 저장된 이미지 객체의 링크만 저장됩니다.
 
