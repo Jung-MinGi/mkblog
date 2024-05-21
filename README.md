@@ -37,6 +37,7 @@
   <br>
   
 - 글 수정페이지
+  - - 이미지 첨부시 바이너리파일은 s3에 저장, DB에는 버킷경로를 담게 구현했습니다.
   - <img src="https://github.com/Jung-MinGi/mkblog/assets/118701129/c55077f9-1434-4aa4-8bbc-8f1e2faa1b6c" alt="image" width="600">
 
 
