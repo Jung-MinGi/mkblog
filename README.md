@@ -1,9 +1,13 @@
-😊 블로그형 개인 프로젝트(❗ 프리티어 기간만료로 아래 마크다운파일로 대체되었습니다
-* 프로그래밍 언어 및 프레임워크: Java&SpringBoot
-* 데이터베이스: MYSQL
-* 개발 도구 및 IDE: intellij
-* 배포 환경: AWS
-* 배포 전략: 깃헛액션을 활용한 CICD<br>
+<h2>블로그형 개인 프로젝트</h2>(❗프리티어 기간만료로 서버는 다운되었습니다)
+
+- 배포 환경: AWS
+
+- 기술 스택
+  - Java17
+  - SpringBoot
+  - MySql
+  - Thymeleaf
+
 <h3>메인화면</h3>
 
 https://github.com/Jung-MinGi/mkblog/assets/118701129/d1271b9e-c5b3-49db-aa89-e4c9b885dee3
