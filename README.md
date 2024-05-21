@@ -8,6 +8,12 @@
   - MySql
   - Thymeleaf
 
+<h2>구현 기능</h2>
+- 게시글 CRUD
+- 메인페이지 글 목록 페이징처리
+
+
+<h2>이미지</h2>
 <h3>메인화면</h3>
 
 https://github.com/Jung-MinGi/mkblog/assets/118701129/d1271b9e-c5b3-49db-aa89-e4c9b885dee3
